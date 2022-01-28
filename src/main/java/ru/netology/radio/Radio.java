@@ -6,10 +6,10 @@ public class Radio {
 
 
 
-    public int getRadioStation() {
-        return radioStation;
+    public int getRadioStation(int radioStation) {
+        return this.radioStation;
     }
-    public void setRadioStation(int radioStation) {
+    public int setRadioStation(int radioStation) {
         if (radioStation < 0) {
             radioStation = 9;
         }
@@ -18,6 +18,7 @@ public class Radio {
         }
         this.radioStation = radioStation;
 
+        return radioStation;
     }
     public void setNext(){
       setRadioStation(radioStation = radioStation + 1);
@@ -28,8 +29,8 @@ public class Radio {
         }
 
 
-    public int getRadioVolume() {
-        return radioVolume;
+    public int getRadioVolume(int radioVolume) {
+        return this.radioVolume;
     }
         public void setRadioVolume(int radioVolume){
         if (radioVolume < 0) {

@@ -8,295 +8,53 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
-   @Test
+   @ParameterizedTest
+   @CsvFileSource(resources = "/data.csv" , delimiter = '|', numLinesToSkip = 1)
    //тесты ручного изменения станции
-    public void test1(){
+    public void test(int expected,  int radioStation){
         Radio radio = new Radio();
-        radio.setRadioStation(0);
-
-        int expected = 0;
-        int actual = radio.getRadioStation();
-
-        assertEquals(expected, actual);
+        radio.setRadioStation(radioStation);
+        assertEquals(expected, radio.getRadioStation(radioStation) );
     }
-    @Test
-    //тесты ручного изменения станции
-    public void test2(){
-        Radio radio = new Radio();
-        radio.setRadioStation(-1);
-
-        int expected = 9;
-        int actual = radio.getRadioStation();
-
-        assertEquals(expected, actual);
-    }
-    @Test
-    //тесты ручного изменения станции
-    public void test3(){
-        Radio radio = new Radio();
-        radio.setRadioStation(1);
-
-        int expected = 1;
-        int actual = radio.getRadioStation();
-
-        assertEquals(expected, actual);
-    }
-    @Test
-    //тесты ручного изменения станции
-    public void test4(){
-        Radio radio = new Radio();
-        radio.setRadioStation(8);
-
-        int expected = 8;
-        int actual = radio.getRadioStation();
-
-        assertEquals(expected, actual);
-    }
-    @Test
-    //тесты ручного изменения станции
-    public void test5(){
-        Radio radio = new Radio();
-        radio.setRadioStation(9);
-
-        int expected = 9;
-        int actual = radio.getRadioStation();
-
-        assertEquals(expected, actual);
-    }
-    @Test
-    //тесты ручного изменения станции
-    public void test6(){
-        Radio radio = new Radio();
-        radio.setRadioStation(10);
-
-        int expected = 0;
-        int actual = radio.getRadioStation();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    //Тест кнопки +
-    public void test7(){
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data2.csv", delimiter = '|', numLinesToSkip = 1)
+    //Тест кнопки + изменение станции
+    public void test2(int expected, int radiostation){
         Radio radio = new Radio();
 
-        radio.setRadioStation(9);
+        radio.setRadioStation(radiostation);
         radio.setNext();
-
-
-        int expected = 0;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
+        assertEquals(expected,  radio.getRadioStation(radiostation));
     }
-    @Test
-    //Тест кнопки +
-    public void test8(){
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data3.csv", delimiter = '|', numLinesToSkip = 1)
+    //Тест кнопки - изменение станции
+    public void test3(int expected, int radiostation){
         Radio radio = new Radio();
 
-        radio.setRadioStation(8);
-        radio.setNext();
-
-
-        int expected = 9;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //Тест кнопки +
-    public void test9(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(7);
-        radio.setNext();
-
-
-        int expected = 8;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //Тест кнопки +
-    public void test10(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(0);
-        radio.setNext();
-
-
-        int expected = 1;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    //Тест кнопки -
-    public void test11(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(9);
+        radio.setRadioStation(radiostation);
         radio.setPrev();
-
-
-        int expected = 8;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
+        assertEquals(expected,  radio.getRadioStation(radiostation));
     }
-    @Test
-    //Тест кнопки -
-    public void test12(){
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data4.csv", delimiter = '|', numLinesToSkip = 1)
+    //Тест кнопки - изменение громкости
+    public void test4(int expected, int radioVolume){
         Radio radio = new Radio();
 
-        radio.setRadioStation(8);
-        radio.setPrev();
-
-
-        int expected = 7;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //Тест кнопки -
-    public void test13(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(7);
-        radio.setPrev();
-
-
-        int expected = 6;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //Тест кнопки -
-    public void test14(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(2);
-        radio.setPrev();
-
-
-        int expected = 1;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //Тест кнопки -
-    public void test15(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(1);
-        radio.setPrev();
-
-
-        int expected = 0;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //Тест кнопки -
-    public void test16(){
-        Radio radio = new Radio();
-
-        radio.setRadioStation(0);
-        radio.setPrev();
-
-
-        int expected = 9;
-        int actual = radio.getRadioStation();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //кнопка громкости -
-    public void test17(){
-        Radio radio = new Radio();
-
-        radio.setRadioVolume(0);
+        radio.setRadioVolume(radioVolume);
         radio.minVolume();
-
-
-        int expected = 0;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
+        assertEquals(expected,  radio.getRadioVolume(radioVolume));
     }
-    @Test
-    //кнопка громкости -
-    public void test18(){
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data5.csv", delimiter = '|', numLinesToSkip = 1)
+    //Тест кнопки - изменение громкости
+    public void test5(int expected, int radioVolume){
         Radio radio = new Radio();
 
-        radio.setRadioVolume(1);
-        radio.minVolume();
-
-
-        int expected = 0;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //кнопка громкости -
-    public void test19(){
-        Radio radio = new Radio();
-
-        radio.setRadioVolume(2);
-        radio.minVolume();
-
-
-        int expected = 1;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //кнопка громкости -
-    public void test444(){
-        Radio radio = new Radio();
-
-        radio.setRadioVolume(3);
-        radio.minVolume();
-
-
-        int expected = 2;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //кнопка громкости +
-    public void test20(){
-        Radio radio = new Radio();
-
-        radio.setRadioVolume(8);
+        radio.setRadioVolume(radioVolume);
         radio.maxVolume();
-
-
-        int expected = 9;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
+        assertEquals(expected,  radio.getRadioVolume(radioVolume));
     }
-    @Test
-    //кнопка громкости +
-    public void test21(){
-        Radio radio = new Radio();
-
-        radio.setRadioVolume(9);
-        radio.maxVolume();
-
-
-        int expected = 10;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
-    }
-    @Test
-    //кнопка громкости +
-    public void test22(){
-        Radio radio = new Radio();
-
-        radio.setRadioVolume(10);
-        radio.maxVolume();
-
-
-        int expected = 10;
-        int actual = radio.getRadioVolume();
-        assertEquals(expected, actual);
-    }
-
 
 }
