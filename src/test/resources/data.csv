@@ -1,7 +1,9 @@
-Test of manual entry of radio stations
-8|8
-9|9
-0|10
-1|1
-0|0
-9|-1
+Expected | Radiostations | maxStations
+8|8|10
+9|9|10
+0|10|10
+1|1|10
+0|0|10
+9|-1|10
+10|10|100
+99|-1|100
